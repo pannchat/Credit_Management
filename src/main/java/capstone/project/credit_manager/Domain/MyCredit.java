@@ -1,12 +1,14 @@
 package capstone.project.credit_manager.Domain;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 
 import static javax.persistence.FetchType.LAZY;
 
+@Entity
+@Getter @Setter
 public class MyCredit {
     @Id
     @GeneratedValue
@@ -15,8 +17,6 @@ public class MyCredit {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "student_id")
     Student student;
-
-    Float grade;
 
     /* 커리큘럼 */
 }
