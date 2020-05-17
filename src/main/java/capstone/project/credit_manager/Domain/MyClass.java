@@ -19,5 +19,5 @@ public class MyClass {
 
     Float grade;
 
-    /* 커리큘럼 */
+    /* 과목정보 */
 }
