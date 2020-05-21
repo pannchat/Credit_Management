@@ -13,7 +13,4 @@ public class Manager {
     @Id @GeneratedValue
     Long id;
 
-    Integer mNum;
-    String Pw;
-    String major;
 }

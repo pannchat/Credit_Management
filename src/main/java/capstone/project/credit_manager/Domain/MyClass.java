@@ -17,7 +17,4 @@ public class MyClass {
     @JoinColumn(name = "student_id")
     Student student;
 
-    Float grade;
-
-    /* 과목정보 */
 }

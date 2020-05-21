@@ -13,8 +13,4 @@ public class GraduationRequirement {
     @Id @GeneratedValue
     Long id;
 
-    Integer year;
-    String major;
-    String url;
-
 }
