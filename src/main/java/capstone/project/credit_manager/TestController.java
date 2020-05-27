@@ -1,5 +1,6 @@
 package capstone.project.credit_manager;
 
+import com.sun.jdi.connect.spi.Connection;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,8 @@ public class TestController {
 
     @GetMapping("/")
     public String test(Model model){
+
+
         return "/test";
     }
 }
