@@ -17,6 +17,6 @@ public class Department {
 
     private String link;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Department category;
 }
