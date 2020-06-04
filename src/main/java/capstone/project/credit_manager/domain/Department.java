@@ -4,9 +4,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -14,6 +12,11 @@ import javax.persistence.Id;
 public class Department {
     @Id @GeneratedValue
     private Long id;
+
     private String name;
+
     private String link;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private Department category;
 }
