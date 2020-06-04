@@ -21,6 +21,9 @@ public class Student extends Account{
     @OneToOne(fetch = FetchType.LAZY)
     private Department subMajor;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    private Department beforeMajor;
+
     private boolean isTransfer;
 
     private boolean isTransferDepartment;

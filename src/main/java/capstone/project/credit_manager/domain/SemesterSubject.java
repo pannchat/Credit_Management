@@ -39,5 +39,9 @@ public class SemesterSubject {
     @Embedded
     private Credit credit;
 
+    // todo: 수강대상 학과가 여러개라면..
+    @OneToOne(fetch = FetchType.LAZY)
+    private Department department;
+
 
 }
