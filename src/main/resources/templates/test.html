@@ -18,7 +18,7 @@
             var param = {};
             param.USER_ID = "201513501"
             param.USER_PWD = "guneka1346!"
-            param.SQL_NAMESPACE =  "ssm01.ssm01001";
+            param.SQL_NAMESPACE = "ssm01.ssm01001";
             param.SQL_ID =  "loginProcess";
 
             // 접속 후 특정 화면 바로가기.
@@ -35,6 +35,7 @@
 
             commUtil.ajax({
                 url: "https://kcloud.kangwon.ac.kr/account/login",
+                type: "jsnop",
                 jdbc : "CommAction",
                 data: param,
                 success: function (res) {
