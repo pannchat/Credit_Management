@@ -12,16 +12,13 @@ import javax.persistence.*;
 @DiscriminatorValue("S")
 public class Student extends Account{
 
-//    @OneToOne(fetch = FetchType.LAZY)
-//    private Department major;
-
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Department multiMajor;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Department subMajor;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Department beforeMajor;
 
     private boolean isTransfer;

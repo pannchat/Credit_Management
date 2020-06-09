@@ -14,6 +14,6 @@ public abstract class Account {
 
     private String password;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Department major;
 }
