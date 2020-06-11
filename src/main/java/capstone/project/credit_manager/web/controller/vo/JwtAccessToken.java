@@ -1,4 +1,4 @@
-package capstone.project.credit_manager.web.controller;
+package capstone.project.credit_manager.web.controller.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
