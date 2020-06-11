@@ -16,21 +16,22 @@ import javax.persistence.*;
 @Entity
 public class StudentSubject {
 
- @Id @GeneratedValue
- private Long id;
+    @Id
+    @GeneratedValue
+    private Long id;
 
- @ManyToOne(fetch = FetchType.LAZY)
- private Student student;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Student student;
 
- @ManyToOne(fetch = FetchType.LAZY)
- private Subject subject;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Subject subject;
 
- @Enumerated(EnumType.STRING)
- private Grade grade;
+    @Enumerated(EnumType.STRING)
+    private Grade grade;
 
- private boolean isRetake; //재수강여부
+    private boolean isRetake; //재수강여부
 
- @Embedded
- private CourseSemester courseSemester;
+    @Embedded
+    private CourseSemester courseSemester;
 
 }

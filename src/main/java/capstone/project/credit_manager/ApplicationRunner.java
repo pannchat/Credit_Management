@@ -1,14 +1,12 @@
 package capstone.project.credit_manager;
 
 import capstone.project.credit_manager.domain.Department;
-import capstone.project.credit_manager.domain.accounts.Account;
 import capstone.project.credit_manager.domain.accounts.Role;
 import capstone.project.credit_manager.domain.accounts.Student;
 import capstone.project.credit_manager.repository.AccountRepository;
 import capstone.project.credit_manager.repository.DepartmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

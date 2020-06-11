@@ -1,6 +1,5 @@
 package capstone.project.credit_manager.domain.accounts;
 
-import capstone.project.credit_manager.domain.accounts.Account;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -21,12 +21,10 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class JwtTokenProvider {
     private static final int ONE_HOUR_TO_SECOND = 3600000;
-
+    private final AccountService accountService;
     @Value("${jwt.secret}")
     private String secret;
     private String key;
-
-    private final AccountService accountService;
 
     @PostConstruct
     protected void init() {

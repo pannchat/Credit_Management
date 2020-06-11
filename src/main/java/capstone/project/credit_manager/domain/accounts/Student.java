@@ -36,7 +36,7 @@ public class Student extends Account {
     public Student(String accountId, String password, Department major, Role role) {
         super(accountId, password, major, role);
 
-        if(super.getRole() != role) {
+        if (super.getRole() != role) {
             throw new FailedCreateAccount(new ErrorResponse("NOT_MATCH_ROLE", "학생은 관리자 계정으로 가입할 수 없습니다."));
         }
         // TODO: 2020/06/11 위의 필드 생성자, add함수 추가
