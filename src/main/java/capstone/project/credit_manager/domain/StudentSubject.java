@@ -1,11 +1,11 @@
 package capstone.project.credit_manager.domain;
 
+import capstone.project.credit_manager.domain.accounts.Student;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 /**
  * 학생의 수업이력

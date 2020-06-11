@@ -1,5 +1,6 @@
-package capstone.project.credit_manager.domain;
+package capstone.project.credit_manager.domain.accounts;
 
+import capstone.project.credit_manager.domain.accounts.Account;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,6 @@ import javax.persistence.Entity;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @DiscriminatorValue("M")
-public class Manager extends Account{
+public class Manager extends Account {
     //todo 암것도없는게 문제
 }
