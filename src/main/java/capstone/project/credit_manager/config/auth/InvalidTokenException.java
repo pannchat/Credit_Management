@@ -1,7 +1,7 @@
 package capstone.project.credit_manager.config.auth;
 
-import capstone.project.credit_manager.common.CommonApiResponse;
-import capstone.project.credit_manager.common.ErrorResponse;
+import capstone.project.credit_manager.web.exception.CommonApiResponse;
+import capstone.project.credit_manager.web.exception.ErrorResponse;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 

@@ -1,4 +1,4 @@
-package capstone.project.credit_manager.common;
+package capstone.project.credit_manager.web.exception;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

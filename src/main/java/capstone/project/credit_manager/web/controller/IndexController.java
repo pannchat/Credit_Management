@@ -1,4 +1,4 @@
-package capstone.project.credit_manager.api;
+package capstone.project.credit_manager.web.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

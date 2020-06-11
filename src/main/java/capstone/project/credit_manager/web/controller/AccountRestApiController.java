@@ -1,4 +1,4 @@
-package capstone.project.credit_manager.api;
+package capstone.project.credit_manager.web.controller;
 
 import capstone.project.credit_manager.config.auth.JwtTokenProvider;
 import capstone.project.credit_manager.domain.accounts.Account;
@@ -24,7 +24,7 @@ public class AccountRestApiController {
         Account account = accountService.authenticate(loginInfoRequestDto);
         String accessToken = jwtTokenProvider.createToken(account.getAccountId());
 
-        return new ResponseEntity(LoginResponseDto.builder().accessToken(accessToken).build(), HttpStatus.OK);
+        return new ResponseEntity(JwtAccessToken.builder().accessToken(accessToken).build(), HttpStatus.OK);
     }
 }
 

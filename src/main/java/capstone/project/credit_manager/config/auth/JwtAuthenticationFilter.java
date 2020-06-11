@@ -1,6 +1,6 @@
 package capstone.project.credit_manager.config.auth;
 
-import capstone.project.credit_manager.common.ErrorResponse;
+import capstone.project.credit_manager.web.exception.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;

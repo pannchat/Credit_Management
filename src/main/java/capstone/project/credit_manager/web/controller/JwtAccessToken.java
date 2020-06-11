@@ -1,4 +1,4 @@
-package capstone.project.credit_manager.api;
+package capstone.project.credit_manager.web.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginResponseDto {
+public class JwtAccessToken {
     private String accessToken;
 }

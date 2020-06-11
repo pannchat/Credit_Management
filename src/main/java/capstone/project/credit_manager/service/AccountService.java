@@ -1,9 +1,10 @@
 package capstone.project.credit_manager.service;
 
-import capstone.project.credit_manager.common.ErrorResponse;
 import capstone.project.credit_manager.domain.accounts.Account;
 import capstone.project.credit_manager.domain.accounts.LoggedInAccount;
 import capstone.project.credit_manager.repository.AccountRepository;
+import capstone.project.credit_manager.service.exception.NotFoundDataException;
+import capstone.project.credit_manager.web.exception.ErrorResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
