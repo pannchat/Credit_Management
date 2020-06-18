@@ -2,7 +2,6 @@ package capstone.project.credit_manager.domain.accounts;
 
 import capstone.project.credit_manager.domain.Department;
 import capstone.project.credit_manager.domain.StudentStatus;
-import capstone.project.credit_manager.web.exception.ErrorResponse;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,6 +14,7 @@ import javax.persistence.*;
 @Entity
 @DiscriminatorValue("S")
 public class Student extends Account {
+    private static final Role role = Role.STUDENT;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Department multiMajor;
@@ -33,12 +33,23 @@ public class Student extends Account {
     private StudentStatus studentStatus;
 
     @Builder
-    public Student(String accountId, String password, Department major, Role role) {
-        super(accountId, password, major, role);
+    public Student(String accountId, String password, String name, Department major, Department multiMajor, Department subMajor, Department beforeMajor, boolean isTransfer, boolean isTransferDepartment, StudentStatus studentStatus) {
+        super(accountId, password, name, major, role);
+        this.multiMajor = multiMajor;
+        this.subMajor = subMajor;
+        this.beforeMajor = beforeMajor;
+        this.isTransfer = isTransfer;
+        this.isTransferDepartment = isTransferDepartment;
+        this.studentStatus = studentStatus;
+    }
 
-        if (super.getRole() != role) {
-            throw new FailedCreateAccountException(new ErrorResponse("NOT_MATCH_ROLE", "학생은 관리자 계정으로 가입할 수 없습니다."));
-        }
-        // TODO: 2020/06/11 위의 필드 생성자, add함수 추가
+    public void update(Student account) {
+        super.update(account);
+        this.multiMajor = account.multiMajor;
+        this.subMajor = account.subMajor;
+        this.beforeMajor = account.beforeMajor;
+        this.isTransfer = account.isTransfer;
+        this.isTransferDepartment = account.isTransferDepartment;
+        this.studentStatus = account.studentStatus;
     }
 }

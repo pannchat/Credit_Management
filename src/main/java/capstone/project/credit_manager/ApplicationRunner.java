@@ -1,10 +1,9 @@
 package capstone.project.credit_manager;
 
 import capstone.project.credit_manager.domain.Department;
-import capstone.project.credit_manager.domain.accounts.Role;
 import capstone.project.credit_manager.domain.accounts.Student;
-import capstone.project.credit_manager.repository.AccountRepository;
 import capstone.project.credit_manager.repository.DepartmentRepository;
+import capstone.project.credit_manager.repository.account.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,8 +29,8 @@ public class ApplicationRunner implements CommandLineRunner {
         Student student = Student.builder()
                 .accountId("201513379")
                 .password(passwordEncoder.encode("password"))
+                .name("user1")
                 .major(savedDepartment)
-                .role(Role.STUDENT)
                 .build();
 
         accountRepository.save(student);

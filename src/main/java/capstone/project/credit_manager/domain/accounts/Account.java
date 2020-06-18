@@ -16,31 +16,42 @@ import javax.persistence.*;
 public abstract class Account {
     @Id
     @GeneratedValue
-    private Long id;
+    protected Long id;
 
     @Column(length = 9, unique = true, nullable = false)
-    private String accountId;
+    protected String accountId;
 
     @Column(length = 100, nullable = false)
-    private String password;
+    protected String password;
+
+    @Column(length = 20, nullable = false)
+    protected String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "major_id", nullable = false)
-    private Department major;
+    protected Department major;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role;
+    protected Role role;
 
-    public Account(String accountId, String password, Department major, Role role) {
+    protected Account(String accountId, String password, String name, Department major, Role role) {
         this.accountId = accountId;
         this.password = password;
+        this.name = name;
         this.major = major;
         this.role = role;
     }
 
     public boolean isMatchPassword(PasswordEncoder passwordEncoder, String password) {
         return passwordEncoder.matches(password, this.password);
+    }
+
+    public void update(Account account) {
+        this.accountId = account.accountId;
+        this.password = account.password;
+        this.name = account.name;
+        this.major = account.major;
     }
 }
 

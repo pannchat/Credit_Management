@@ -1,6 +1,8 @@
 package capstone.project.credit_manager.domain.accounts;
 
+import capstone.project.credit_manager.domain.Department;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,5 +14,11 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("M")
 public class Manager extends Account {
-    //todo 암것도없는게 문제
+    private static final Role role = Role.MANAGER;
+
+    @Builder
+    public Manager(String accountId, String password, String name, Department major) {
+        super(accountId, password, name, major, role);
+    }
+
 }
