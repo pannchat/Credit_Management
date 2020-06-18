@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.*;
 
 @Configuration
 @EnableWebSecurity
@@ -20,7 +20,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .mvcMatchers(GET, "/accounts/**").authenticated();
+                .mvcMatchers(GET, "/accounts/**").authenticated()
+                .mvcMatchers(POST, "/api/accounts/student/**").authenticated()
+                .mvcMatchers(POST, "/api/accounts/manager/**").authenticated()
+                .mvcMatchers(PUT, "/api/accounts/**").authenticated()
+                .mvcMatchers(DELETE, "/api/accounts/**").authenticated();
 
         http.authorizeRequests().anyRequest().permitAll();
 
