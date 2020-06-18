@@ -1,11 +1,11 @@
 package capstone.project.credit_manager.domain;
 
+import capstone.project.credit_manager.domain.accounts.Student;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 /**
  * 학생의 수업이력
@@ -16,21 +16,22 @@ import java.time.LocalDateTime;
 @Entity
 public class StudentSubject {
 
- @Id @GeneratedValue
- private Long id;
+    @Id
+    @GeneratedValue
+    private Long id;
 
- @ManyToOne(fetch = FetchType.LAZY)
- private Student student;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Student student;
 
- @ManyToOne(fetch = FetchType.LAZY)
- private Subject subject;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Subject subject;
 
- @Enumerated(EnumType.STRING)
- private Grade grade;
+    @Enumerated(EnumType.STRING)
+    private Grade grade;
 
- private boolean isRetake; //재수강여부
+    private boolean isRetake; //재수강여부
 
- @Embedded
- private CourseSemester courseSemester;
+    @Embedded
+    private CourseSemester courseSemester;
 
 }

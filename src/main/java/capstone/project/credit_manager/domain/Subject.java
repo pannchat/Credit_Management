@@ -8,7 +8,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Class")
 public class Subject {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
 
     private Long subjectNum;    //과목번호
