@@ -53,5 +53,6 @@ public abstract class Account {
         this.name = account.name;
         this.major = account.major;
     }
+
 }
 

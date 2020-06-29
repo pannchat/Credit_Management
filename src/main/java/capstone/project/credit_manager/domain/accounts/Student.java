@@ -52,4 +52,16 @@ public class Student extends Account {
         this.isTransferDepartment = account.isTransferDepartment;
         this.studentStatus = account.studentStatus;
     }
+
+    public String getMultiMajorName() {
+        return multiMajor == null ? null : multiMajor.getName();
+    }
+
+    public String getSubMajorName() {
+        return subMajor == null ? null : subMajor.getName();
+    }
+
+    public String getBeforeMajorName() {
+        return beforeMajor == null ? null : beforeMajor.getName();
+    }
 }

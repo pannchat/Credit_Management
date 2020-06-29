@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class AccountDtoService {
     private final AccountRepository accountRepository;
 
-    // TODO: 2020/06/18 리팩토링
     public Object getAccountInfo(LoggedInAccount loggedInAccount) {
         if (loggedInAccount.isStudent()) {
             Student student = accountRepository.findStudentById(loggedInAccount.getId())
@@ -33,9 +32,9 @@ public class AccountDtoService {
 
             return StudentInfoDto.builder()
                     .commonAccountInfoDto(commonAccountInfoDto)
-                    .multiMajorName(student.getMultiMajor() == null ? null : student.getMultiMajor().getName())
-                    .subMajorName(student.getSubMajor() == null ? null : student.getSubMajor().getName())
-                    .beforeMajorName(student.getBeforeMajor() == null ? null : student.getBeforeMajor().getName())
+                    .multiMajorName(student.getMultiMajorName())
+                    .subMajorName(student.getSubMajorName())
+                    .beforeMajorName(student.getBeforeMajorName())
                     .isTransfer(student.isTransfer())
                     .isTransferDepartment(student.isTransferDepartment())
                     .studentStatus(student.getStudentStatus())

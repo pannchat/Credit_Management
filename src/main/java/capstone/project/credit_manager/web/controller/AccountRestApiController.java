@@ -40,16 +40,9 @@ public class AccountRestApiController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PutMapping("/student")
-    public ResponseEntity updateStudent(@RequestBody SignUpStudentInfoDto updatedAccountInfoDto, @AuthenticationPrincipal LoggedInAccount loggedInAccount) {
+    @PutMapping
+    public ResponseEntity updateStudent(@RequestBody SignUpCommonInfoDto updatedAccountInfoDto, @AuthenticationPrincipal LoggedInAccount loggedInAccount) {
         Account account = accountService.updateAccount(loggedInAccount, updatedAccountInfoDto);
-        String accessToken = jwtTokenProvider.createToken(account.getAccountId());
-        return new ResponseEntity(JwtAccessToken.builder().accessToken(accessToken).build(), HttpStatus.OK);
-    }
-
-    @PutMapping("/manager")
-    public ResponseEntity updateManager(@RequestBody SignUpManagerInfoDto updatedManagerInfoDto, @AuthenticationPrincipal LoggedInAccount loggedInAccount) {
-        Account account = accountService.updateAccount(loggedInAccount, updatedManagerInfoDto);
         String accessToken = jwtTokenProvider.createToken(account.getAccountId());
         return new ResponseEntity(JwtAccessToken.builder().accessToken(accessToken).build(), HttpStatus.OK);
     }
