@@ -18,7 +18,6 @@ import javax.servlet.http.HttpSession;
 @RestController
 public class AccountRestApiController {
     private final AccountService accountService;
-    private final AccountDtoService accountDtoService;
     private final JwtTokenProvider jwtTokenProvider;
 
     @PostMapping("/login")
@@ -30,26 +29,26 @@ public class AccountRestApiController {
     }
 
     @PostMapping("/student")
-    public ResponseEntity signUpStudent(@RequestBody SignupStudentInfoDto signupStudentInfoDto) {
+    public ResponseEntity signUpStudent(@RequestBody SignUpStudentInfoDto signupStudentInfoDto) {
         accountService.joinStudent(signupStudentInfoDto);
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @PostMapping("/manager")
-    public ResponseEntity signUpStudent(@RequestBody SignupManagerInfoDto signupManagerInfoDto) {
+    public ResponseEntity signUpStudent(@RequestBody SignUpManagerInfoDto signupManagerInfoDto) {
         accountService.joinManager(signupManagerInfoDto);
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @PutMapping("/student")
-    public ResponseEntity updateStudent(@RequestBody SignupStudentInfoDto updatedAccountInfoDto, @AuthenticationPrincipal LoggedInAccount loggedInAccount) {
+    public ResponseEntity updateStudent(@RequestBody SignUpStudentInfoDto updatedAccountInfoDto, @AuthenticationPrincipal LoggedInAccount loggedInAccount) {
         Account account = accountService.updateAccount(loggedInAccount, updatedAccountInfoDto);
         String accessToken = jwtTokenProvider.createToken(account.getAccountId());
         return new ResponseEntity(JwtAccessToken.builder().accessToken(accessToken).build(), HttpStatus.OK);
     }
 
     @PutMapping("/manager")
-    public ResponseEntity updateManager(@RequestBody SignupManagerInfoDto updatedManagerInfoDto, @AuthenticationPrincipal LoggedInAccount loggedInAccount) {
+    public ResponseEntity updateManager(@RequestBody SignUpManagerInfoDto updatedManagerInfoDto, @AuthenticationPrincipal LoggedInAccount loggedInAccount) {
         Account account = accountService.updateAccount(loggedInAccount, updatedManagerInfoDto);
         String accessToken = jwtTokenProvider.createToken(account.getAccountId());
         return new ResponseEntity(JwtAccessToken.builder().accessToken(accessToken).build(), HttpStatus.OK);

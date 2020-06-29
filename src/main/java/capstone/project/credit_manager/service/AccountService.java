@@ -45,13 +45,13 @@ public class AccountService implements UserDetailsService {
         return new LoggedInAccount(account);
     }
 
-    public Account joinStudent(SignupStudentInfoDto signUpInfo) {
+    public Account joinStudent(SignUpStudentInfoDto signUpInfo) {
         Student newStudent = createStudent(signUpInfo);
 
         return accountRepository.save(newStudent);
     }
 
-    private Student createStudent(SignupStudentInfoDto signUpInfo) {
+    private Student createStudent(SignUpStudentInfoDto signUpInfo) {
         Department major = departmentRepository.findById(signUpInfo.getDepartmentId())
                 .orElseThrow(() -> new NotFoundDataException(new ErrorResponse("NOT_FOUND_MAJOR", "없는 학과입니다.")));
 
@@ -71,7 +71,7 @@ public class AccountService implements UserDetailsService {
         return Student.builder()
                 .accountId(signUpInfo.getAccountId())
                 .password(signUpInfo.getPassword())
-                .name(signUpInfo.getUsername())
+                .name(signUpInfo.getAccountName())
                 .major(major)
                 .beforeMajor(beforeMajor)
                 .multiMajor(multiMajor)
@@ -82,32 +82,33 @@ public class AccountService implements UserDetailsService {
                 .build();
     }
 
-    public Account joinManager(SignupManagerInfoDto signupManagerInfoDto) {
+    public Account joinManager(SignUpManagerInfoDto signupManagerInfoDto) {
         Manager newManager = createManager(signupManagerInfoDto);
 
         return accountRepository.save(newManager);
     }
 
-    private Manager createManager(SignupManagerInfoDto signupManagerInfoDto) {
+    private Manager createManager(SignUpManagerInfoDto signupManagerInfoDto) {
         Department major = departmentRepository.findById(signupManagerInfoDto.getDepartmentId())
                 .orElseThrow(() -> new NotFoundDataException(new ErrorResponse("NOT_FOUND_MAJOR", "없는 학과입니다.")));
 
         return Manager.builder()
                 .accountId(signupManagerInfoDto.getAccountId())
                 .password(signupManagerInfoDto.getPassword())
-                .name(signupManagerInfoDto.getUsername())
+                .name(signupManagerInfoDto.getAccountName())
                 .major(major)
                 .build();
     }
 
-    public Account updateAccount(LoggedInAccount loggedInAccount, SignupManagerInfoDto signupManagerInfoDto) {
+    public Account updateAccount(LoggedInAccount loggedInAccount, SignUpCommonInfoDto updatedAccountInfo) {
         Account account = accountRepository.findById(loggedInAccount.getId())
                 .orElseThrow(() -> new NotFoundDataException(new ErrorResponse("NOT_FOUND_ACCOUNT", "회원을 찾을 수 없습니다.")));
+
         Account updateAccount;
         if (loggedInAccount.isStudent()) {
-            updateAccount = createStudent((SignupStudentInfoDto) signupManagerInfoDto);
+            updateAccount = createStudent((SignUpStudentInfoDto) updatedAccountInfo);
         } else {
-            updateAccount = createManager(signupManagerInfoDto);
+            updateAccount = createManager((SignUpManagerInfoDto) updatedAccountInfo);
         }
 
         account.update(updateAccount);
