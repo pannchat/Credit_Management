@@ -43,14 +43,14 @@ public class Student extends Account {
         this.studentStatus = studentStatus;
     }
 
-    public void update(Student account) {
-        super.update(account);
-        this.multiMajor = account.multiMajor;
-        this.subMajor = account.subMajor;
-        this.beforeMajor = account.beforeMajor;
-        this.isTransfer = account.isTransfer;
-        this.isTransferDepartment = account.isTransferDepartment;
-        this.studentStatus = account.studentStatus;
+    public void update(Student student) {
+        super.update(student);
+        this.multiMajor = student.multiMajor;
+        this.subMajor = student.subMajor;
+        this.beforeMajor = student.beforeMajor;
+        this.isTransfer = student.isTransfer;
+        this.isTransferDepartment = student.isTransferDepartment;
+        this.studentStatus = student.studentStatus;
     }
 
     public String getMultiMajorName() {
@@ -63,5 +63,17 @@ public class Student extends Account {
 
     public String getBeforeMajorName() {
         return beforeMajor == null ? null : beforeMajor.getName();
+    }
+
+    public Long getMultiMajorId() {
+        return multiMajor == null ? null : multiMajor.getId();
+    }
+
+    public Long getSubMajorId() {
+        return subMajor == null ? null : subMajor.getId();
+    }
+
+    public Long getBeforeMajorId() {
+        return beforeMajor == null ? null : beforeMajor.getId();
     }
 }

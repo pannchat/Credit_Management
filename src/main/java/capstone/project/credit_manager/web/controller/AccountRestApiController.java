@@ -3,11 +3,10 @@ package capstone.project.credit_manager.web.controller;
 import capstone.project.credit_manager.config.auth.JwtTokenProvider;
 import capstone.project.credit_manager.domain.accounts.Account;
 import capstone.project.credit_manager.domain.accounts.LoggedInAccount;
-import capstone.project.credit_manager.service.*;
-import capstone.project.credit_manager.service.dto.LoginInfoRequestDto;
-import capstone.project.credit_manager.service.dto.AccountCommonInfoDto;
+import capstone.project.credit_manager.service.AccountService;
 import capstone.project.credit_manager.service.dto.AccountManagerInfoDto;
 import capstone.project.credit_manager.service.dto.AccountStudentInfoDto;
+import capstone.project.credit_manager.service.dto.LoginInfoRequestDto;
 import capstone.project.credit_manager.web.controller.vo.JwtAccessToken;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -44,9 +43,16 @@ public class AccountRestApiController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PutMapping
-    public ResponseEntity updateStudent(@RequestBody AccountCommonInfoDto updatedAccountInfoDto, @AuthenticationPrincipal LoggedInAccount loggedInAccount) {
-        Account account = accountService.updateAccount(loggedInAccount, updatedAccountInfoDto);
+    @PutMapping("/student")
+    public ResponseEntity updateStudent(@RequestBody AccountStudentInfoDto updatedAccountInfoDto, @AuthenticationPrincipal LoggedInAccount loggedInAccount) {
+        Account account = accountService.updateStudent(loggedInAccount, updatedAccountInfoDto);
+        String accessToken = jwtTokenProvider.createToken(account.getAccountId());
+        return new ResponseEntity(JwtAccessToken.builder().accessToken(accessToken).build(), HttpStatus.OK);
+    }
+
+    @PutMapping("/manager")
+    public ResponseEntity updateManager(@RequestBody AccountManagerInfoDto updatedAccountInfoDto, @AuthenticationPrincipal LoggedInAccount loggedInAccount) {
+        Account account = accountService.updateManager(loggedInAccount, updatedAccountInfoDto);
         String accessToken = jwtTokenProvider.createToken(account.getAccountId());
         return new ResponseEntity(JwtAccessToken.builder().accessToken(accessToken).build(), HttpStatus.OK);
     }
