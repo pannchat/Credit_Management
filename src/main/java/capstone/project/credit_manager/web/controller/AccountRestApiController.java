@@ -4,6 +4,10 @@ import capstone.project.credit_manager.config.auth.JwtTokenProvider;
 import capstone.project.credit_manager.domain.accounts.Account;
 import capstone.project.credit_manager.domain.accounts.LoggedInAccount;
 import capstone.project.credit_manager.service.*;
+import capstone.project.credit_manager.service.dto.LoginInfoRequestDto;
+import capstone.project.credit_manager.service.dto.AccountCommonInfoDto;
+import capstone.project.credit_manager.service.dto.AccountManagerInfoDto;
+import capstone.project.credit_manager.service.dto.AccountStudentInfoDto;
 import capstone.project.credit_manager.web.controller.vo.JwtAccessToken;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,19 +33,19 @@ public class AccountRestApiController {
     }
 
     @PostMapping("/student")
-    public ResponseEntity signUpStudent(@RequestBody SignUpStudentInfoDto signupStudentInfoDto) {
+    public ResponseEntity signUpStudent(@RequestBody AccountStudentInfoDto signupStudentInfoDto) {
         accountService.joinStudent(signupStudentInfoDto);
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @PostMapping("/manager")
-    public ResponseEntity signUpStudent(@RequestBody SignUpManagerInfoDto signupManagerInfoDto) {
+    public ResponseEntity signUpStudent(@RequestBody AccountManagerInfoDto signupManagerInfoDto) {
         accountService.joinManager(signupManagerInfoDto);
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity updateStudent(@RequestBody SignUpCommonInfoDto updatedAccountInfoDto, @AuthenticationPrincipal LoggedInAccount loggedInAccount) {
+    public ResponseEntity updateStudent(@RequestBody AccountCommonInfoDto updatedAccountInfoDto, @AuthenticationPrincipal LoggedInAccount loggedInAccount) {
         Account account = accountService.updateAccount(loggedInAccount, updatedAccountInfoDto);
         String accessToken = jwtTokenProvider.createToken(account.getAccountId());
         return new ResponseEntity(JwtAccessToken.builder().accessToken(accessToken).build(), HttpStatus.OK);

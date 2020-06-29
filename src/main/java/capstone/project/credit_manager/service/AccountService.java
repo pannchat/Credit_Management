@@ -7,6 +7,10 @@ import capstone.project.credit_manager.domain.accounts.Manager;
 import capstone.project.credit_manager.domain.accounts.Student;
 import capstone.project.credit_manager.repository.DepartmentRepository;
 import capstone.project.credit_manager.repository.account.AccountRepository;
+import capstone.project.credit_manager.service.dto.LoginInfoRequestDto;
+import capstone.project.credit_manager.service.dto.AccountCommonInfoDto;
+import capstone.project.credit_manager.service.dto.AccountManagerInfoDto;
+import capstone.project.credit_manager.service.dto.AccountStudentInfoDto;
 import capstone.project.credit_manager.service.exception.NotFoundDataException;
 import capstone.project.credit_manager.web.exception.ErrorResponse;
 import lombok.RequiredArgsConstructor;
@@ -45,13 +49,13 @@ public class AccountService implements UserDetailsService {
         return new LoggedInAccount(account);
     }
 
-    public Account joinStudent(SignUpStudentInfoDto signUpInfo) {
+    public Account joinStudent(AccountStudentInfoDto signUpInfo) {
         Student newStudent = createStudent(signUpInfo);
 
         return accountRepository.save(newStudent);
     }
 
-    private Student createStudent(SignUpStudentInfoDto signUpInfo) {
+    private Student createStudent(AccountStudentInfoDto signUpInfo) {
         Department major = departmentRepository.findById(signUpInfo.getDepartmentId())
                 .orElseThrow(() -> new NotFoundDataException(new ErrorResponse("NOT_FOUND_MAJOR", "없는 학과입니다.")));
 
@@ -82,13 +86,13 @@ public class AccountService implements UserDetailsService {
                 .build();
     }
 
-    public Account joinManager(SignUpManagerInfoDto signupManagerInfoDto) {
+    public Account joinManager(AccountManagerInfoDto signupManagerInfoDto) {
         Manager newManager = createManager(signupManagerInfoDto);
 
         return accountRepository.save(newManager);
     }
 
-    private Manager createManager(SignUpManagerInfoDto signupManagerInfoDto) {
+    private Manager createManager(AccountManagerInfoDto signupManagerInfoDto) {
         Department major = departmentRepository.findById(signupManagerInfoDto.getDepartmentId())
                 .orElseThrow(() -> new NotFoundDataException(new ErrorResponse("NOT_FOUND_MAJOR", "없는 학과입니다.")));
 
@@ -100,15 +104,15 @@ public class AccountService implements UserDetailsService {
                 .build();
     }
 
-    public Account updateAccount(LoggedInAccount loggedInAccount, SignUpCommonInfoDto updatedAccountInfo) {
+    public Account updateAccount(LoggedInAccount loggedInAccount, AccountCommonInfoDto updatedAccountInfo) {
         Account account = accountRepository.findById(loggedInAccount.getId())
                 .orElseThrow(() -> new NotFoundDataException(new ErrorResponse("NOT_FOUND_ACCOUNT", "회원을 찾을 수 없습니다.")));
 
         Account updateAccount;
         if (loggedInAccount.isStudent()) {
-            updateAccount = createStudent((SignUpStudentInfoDto) updatedAccountInfo);
+            updateAccount = createStudent((AccountStudentInfoDto) updatedAccountInfo);
         } else {
-            updateAccount = createManager((SignUpManagerInfoDto) updatedAccountInfo);
+            updateAccount = createManager((AccountManagerInfoDto) updatedAccountInfo);
         }
 
         account.update(updateAccount);
