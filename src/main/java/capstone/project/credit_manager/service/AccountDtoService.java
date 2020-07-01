@@ -2,6 +2,7 @@ package capstone.project.credit_manager.service;
 
 import capstone.project.credit_manager.domain.accounts.LoggedInAccount;
 import capstone.project.credit_manager.domain.accounts.Manager;
+import capstone.project.credit_manager.domain.accounts.Role;
 import capstone.project.credit_manager.domain.accounts.Student;
 import capstone.project.credit_manager.repository.account.AccountRepository;
 import capstone.project.credit_manager.repository.account.dto.CommonAccountInfoDto;
@@ -18,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class AccountDtoService {
     private final AccountRepository accountRepository;
 
-    // TODO: 2020/06/18 리팩토링
     public Object getAccountInfo(LoggedInAccount loggedInAccount) {
         if (loggedInAccount.isStudent()) {
             Student student = accountRepository.findStudentById(loggedInAccount.getId())
@@ -27,15 +27,20 @@ public class AccountDtoService {
             CommonAccountInfoDto commonAccountInfoDto = CommonAccountInfoDto.builder()
                     .id(student.getId())
                     .accountId(student.getAccountId())
-                    .username(student.getName())
+                    .accountName(student.getName())
+                    .departmentId(student.getMajor().getId())
                     .departmentName(student.getMajor().getName())
+                    .accountRole(Role.STUDENT)
                     .build();
 
             return StudentInfoDto.builder()
                     .commonAccountInfoDto(commonAccountInfoDto)
-                    .multiMajorName(student.getMultiMajor() == null ? null : student.getMultiMajor().getName())
-                    .subMajorName(student.getSubMajor() == null ? null : student.getSubMajor().getName())
-                    .beforeMajorName(student.getBeforeMajor() == null ? null : student.getBeforeMajor().getName())
+                    .multipleMajorId(student.getMultiMajorId())
+                    .multiMajorName(student.getMultiMajorName())
+                    .subMajorId(student.getSubMajorId())
+                    .subMajorName(student.getSubMajorName())
+                    .beforeMajorId(student.getBeforeMajorId())
+                    .beforeMajorName(student.getBeforeMajorName())
                     .isTransfer(student.isTransfer())
                     .isTransferDepartment(student.isTransferDepartment())
                     .studentStatus(student.getStudentStatus())
@@ -47,8 +52,10 @@ public class AccountDtoService {
             return CommonAccountInfoDto.builder()
                     .id(manager.getId())
                     .accountId(manager.getAccountId())
-                    .username(manager.getName())
+                    .accountName(manager.getName())
+                    .departmentId(manager.getMajor().getId())
                     .departmentName(manager.getMajor().getName())
+                    .accountRole(Role.MANAGER)
                     .build();
         }
     }

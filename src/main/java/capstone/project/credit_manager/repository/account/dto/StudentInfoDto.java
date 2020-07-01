@@ -9,18 +9,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StudentInfoDto {
     private CommonAccountInfoDto commonAccountInfoDto;
+    private Long multipleMajorId;
     private String multiMajorName;
+    private Long subMajorId;
     private String subMajorName;
+    private Long beforeMajorId;
     private String beforeMajorName;
     private StudentStatus studentStatus;
     private boolean isTransfer;
     private boolean isTransferDepartment;
 
     @Builder
-    public StudentInfoDto(CommonAccountInfoDto commonAccountInfoDto, String multiMajorName, String subMajorName, String beforeMajorName, StudentStatus studentStatus, boolean isTransfer, boolean isTransferDepartment) {
+    public StudentInfoDto(CommonAccountInfoDto commonAccountInfoDto, Long multipleMajorId, String multiMajorName, Long subMajorId, String subMajorName, Long beforeMajorId, String beforeMajorName, StudentStatus studentStatus, boolean isTransfer, boolean isTransferDepartment) {
         this.commonAccountInfoDto = commonAccountInfoDto;
+        this.multipleMajorId = multipleMajorId;
         this.multiMajorName = multiMajorName;
+        this.subMajorId = subMajorId;
         this.subMajorName = subMajorName;
+        this.beforeMajorId = beforeMajorId;
         this.beforeMajorName = beforeMajorName;
         this.studentStatus = studentStatus;
         this.isTransfer = isTransfer;

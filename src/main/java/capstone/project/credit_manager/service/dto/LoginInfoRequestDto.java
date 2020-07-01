@@ -1,4 +1,4 @@
-package capstone.project.credit_manager.service;
+package capstone.project.credit_manager.service.dto;
 
 import lombok.AccessLevel;
 import lombok.Getter;
